@@ -1,0 +1,85 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Aluno {
+    String nome;
+    int idade;
+    double notaMedia;
+
+    public Aluno(String nome, int idade, double notaMedia) {
+        this.nome = nome;
+        this.idade = idade;
+        this.notaMedia = notaMedia;
+    }
+}
+
+public class CadastroDeAlunos {
+    public static void main(String[] args) {
+        ArrayList<Aluno> alunos = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
+
+        do {
+            System.out.println("\nMenu:");
+            System.out.println("1. Adicionar aluno");
+            System.out.println("2. Remover aluno");
+            System.out.println("3. Exibir lista de alunos");
+            System.out.println("4. Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    adicionarAluno(alunos);
+                    break;
+                case 2:
+                    removerAluno(alunos);
+                    break;
+                case 3:
+                    exibirAlunos(alunos);
+                    break;
+                case 4:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+            }
+        } while (opcao != 4);
+    }
+
+    public static void adicionarAluno(ArrayList<Aluno> alunos) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nome do aluno: ");
+        String nome = scanner.nextLine();
+        System.out.print("Idade do aluno: ");
+        int idade = scanner.nextInt();
+        System.out.print("Nota média do aluno: ");
+        double notaMedia = scanner.nextDouble();
+
+        Aluno aluno = new Aluno(nome, idade, notaMedia);
+        alunos.add(aluno);
+
+        System.out.println("Aluno adicionado com sucesso!");
+    }
+
+    public static void removerAluno(ArrayList<Aluno> alunos) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Índice do aluno a ser removido: ");
+        int indice = scanner.nextInt();
+
+        if (indice >= 0 && indice < alunos.size()) {
+            alunos.remove(indice);
+            System.out.println("Aluno removido com sucesso!");
+        } else {
+            System.out.println("Índice inválido. Nenhum aluno removido.");
+        }
+    }
+
+    public static void exibirAlunos(ArrayList<Aluno> alunos) {
+        System.out.println("\nLista de alunos:");
+        for (int i = 0; i < alunos.size(); i++) {
+            Aluno aluno = alunos.get(i);
+            System.out.println("Índice: " + i + ", Nome: " + aluno.nome + ", Idade: " + aluno.idade + ", Nota Média: " + aluno.notaMedia);
+        }
+    }
+}
